@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,10 +31,11 @@ public class AppTest
 
         driver.findElement(By.xpath(".//span[contains(text(), '250 лучших фильмов')]")).click();
         driver.findElement(By.xpath(".//span[contains(text(), 'Все годы')]")).click();
-        driver.findElement(By.xpath(".//a[@href='/lists/top250/2021/?tab=all']")).click();
 
+        WebDriverWait ulWait = new WebDriverWait(driver, 30);
+        ulWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(".//div[@class='selections-select__dropdown-wrapper']")));
+        driver.findElement(By.linkText("2021")).click();
 
 
     }
 }
-
